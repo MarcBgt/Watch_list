@@ -21,30 +21,42 @@
           </div>
         </div>
       <% end %>
+    </div>
 
-      <div class="reviews-container">
-        <div class="reviews-list">
-          <h1>Reviews:</h1>
-          <% if list.reviews.present? %>
-            <% list.reviews.each do |review| %>
-              <div class="review-card">
-                <p> <%= review.rating %> <%= review.created_at %> </p>
-                <p> <%= review.content %> </p>
-              </div>
-            <% end %>
-          <% else %>
-            <p>Soit le premier à laisser une review !!</p>
+    <div class="reviews-container container">
+      <div class="reviews-list">
+        <h3 class="my-2">Reviews:</h3>
+        <% if @list.reviews.present? %>
+          <% @list.reviews.each do |review| %>
+            <div class="review-card">
+              <p>
+                <b>
+                <% review.rating.to_i.times do  %>
+                  <i class="fas fa-star" style="color:yellow"></i>
+                <% end %>
+                <% (5 - review.rating.to_i).times do  %>
+                  <i class="far fa-star" style="color:yellow"></i>
+                <% end %>
+                </b>
+                <i style="color:grey">le:<%= review.created_at.strftime("%d/%m/%Y") %></i>
+              </p>
+              <p><span class="review-content"> <%= review.content %> </span></p>
+            </div>
           <% end %>
-        </div>
-        <div class="review-new">
-          <%= simple_form_for(@list) do |f| %>
-            <%= f.input :content %>
-            <%= f.input :rating %>
-            <%= f.submit 'Submit', class: ' btn btn-primary my-2' %>
-          <% end %>
-        </div>
+        <% else %>
+          <p>Soit le premier à laisser une review !!</p>
+        <% end %>
       </div>
-  </div>
+      <div class="review-new">
+        <h3>Ajouter une review:</h3>
+        <%= simple_form_for([@list, @review]) do |f| %>
+          <%= f.input :content %>
+          <%= f.input :rating %>
+          <%= f.submit 'Submit', class: ' btn btn-primary my-2' %>
+        <% end %>
+      </div>
+    </div>
+
     <% else %>
       <div class="container text-center">
         <p> Bah alors c'est bien vide cette liste</p>

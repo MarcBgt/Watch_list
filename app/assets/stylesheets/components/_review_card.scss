@@ -1,0 +1,25 @@
+.reviews-container {
+  display: flex;
+}
+
+.reviews-list {
+  flex-grow: 1;
+}
+
+.review-card {
+  padding: 0px 10px;
+  border-bottom: solid 1px #99A0A5;
+  line-height: 0.5;
+  margin-top: 24px;
+
+}
+
+
+.review-new {
+  padding: 0px 20px;
+  margin-left: 30px;
+}
+
+.review-content {
+  font-size: 16px;
+}
