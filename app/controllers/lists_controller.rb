@@ -1,5 +1,5 @@
 class ListsController < ApplicationController
-  before_action :set_params, only: [:destroy, :show]
+  before_action :set_list, only: [:destroy, :show]
   def index
     @lists = List.all
   end

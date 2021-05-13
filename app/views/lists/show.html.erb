@@ -1,0 +1,53 @@
+<div>
+  <div class="list-banner">
+    <h2><%= @list.name %>(<%= @list.bookmarks.count %> films)</h2>
+    <%= link_to "Ajouter un film",  new_list_bookmark_path(@list), class: "btn btn-success"  %>
+  </div>
+  <div class="bookmarks-grid container">
+    <% if @list.bookmarks.present? %>
+      <% @list.bookmarks.each do |bookmark| %>
+        <div class="bookmark-card">
+          <%= image_tag bookmark.movie.poster_url, alt: "movie picture" %>
+          <div class="bookmark-title-rating">
+            <h3><%= bookmark.movie.title %></h3>
+            <p><%= bookmark.movie.rating %> <i class="fas fa-star"></i></p>
+          </div>
+          <div class="bookmark-overview">
+            <p><%= bookmark.movie.overview %></p>
+          </div>
+          <div class="bookmark-comment-delete">
+            <p><i class="fas fa-quote-left"></i> <%= bookmark.comment %></p>
+            <%= link_to "Delete", bookmark_path(bookmark), method: :delete, class: "bookmark-delete"  %>
+          </div>
+        </div>
+      <% end %>
+
+      <div class="reviews-container">
+        <div class="reviews-list">
+          <h1>Reviews:</h1>
+          <% if list.reviews.present? %>
+            <% list.reviews.each do |review| %>
+              <div class="review-card">
+                <p> <%= review.rating %> <%= review.created_at %> </p>
+                <p> <%= review.content %> </p>
+              </div>
+            <% end %>
+          <% else %>
+            <p>Soit le premier à laisser une review !!</p>
+          <% end %>
+        </div>
+        <div class="review-new">
+          <%= simple_form_for(@list) do |f| %>
+            <%= f.input :content %>
+            <%= f.input :rating %>
+            <%= f.submit 'Submit', class: ' btn btn-primary my-2' %>
+          <% end %>
+        </div>
+      </div>
+  </div>
+    <% else %>
+      <div class="container text-center">
+        <p> Bah alors c'est bien vide cette liste</p>
+      </div>
+    <% end %>
+</div>
