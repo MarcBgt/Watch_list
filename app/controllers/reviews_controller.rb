@@ -5,10 +5,16 @@ class ReviewsController < ApplicationController
     @list = List.find(params[:list_id])
     @review.list = @list
     if @review.save
-      redirect_to list_path(@review.list)
+      redirect_to list_path(@review.list, anchor: "review-#{@review.id}")
     else
       render "lists/show"
     end
+  end
+
+  def destroy
+    @review = Review.find(params[:id])
+    @review.destroy
+    redirect_to list_path(@review.list)
   end
 
   private

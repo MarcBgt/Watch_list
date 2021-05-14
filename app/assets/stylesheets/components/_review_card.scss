@@ -12,6 +12,20 @@
   line-height: 0.5;
   margin-top: 24px;
 
+    & .review-delete {
+      opacity: 0;
+    }
+
+  &:hover {
+    & .review-delete {
+      color: red;
+      opacity: 1;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
 }
 
 

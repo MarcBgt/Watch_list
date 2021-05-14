@@ -28,7 +28,7 @@
         <h3 class="my-2">Reviews:</h3>
         <% if @list.reviews.present? %>
           <% @list.reviews.each do |review| %>
-            <div class="review-card">
+            <div class="review-card" id="review-<%=review.id%>">
               <p>
                 <b>
                 <% review.rating.to_i.times do  %>
@@ -38,7 +38,7 @@
                   <i class="far fa-star" style="color:#FDDF33"></i>
                 <% end %>
                 </b>
-                <i style="color:grey">le:<%= review.created_at.strftime("%d/%m/%Y") %></i>
+                <i class="review-date" style="color:grey"><%= review.created_at.strftime("%a %b %e at %l:%M%p") %></i>  <%= link_to "Delete", review_path(review), method: :delete, class: "review-delete"  %>
               </p>
               <p><span class="review-content"> <%= review.content %> </span></p>
             </div>
